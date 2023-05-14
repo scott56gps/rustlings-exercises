@@ -12,11 +12,7 @@ fn main() {
     let error_margin = f64::EPSILON;
     let x = 1.2331f64;
     let y = 1.2332f64;
-<<<<<<< HEAD
-    if (y - x).abs() > f64::EPSILON { // If the difference is greater than the measuring stick for f64 types
-=======
     if (y - x).abs() > error_margin {
->>>>>>> d3b5cb8ed5bd7651e6730aa06be6212ba4852f91
         println!("Success!");
     }
 }
