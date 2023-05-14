@@ -9,8 +9,15 @@ mod macros {
             println!("Check out my macro!");
         };
     }
+
+    macro_rules! greet {
+        ($x:expr) => {
+            println!("Hello {}!", $x);
+        };
+    }
 }
 
 fn main() {
     my_macro!();
+    greet!("Scott");
 }

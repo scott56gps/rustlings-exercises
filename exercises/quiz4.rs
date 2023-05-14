@@ -5,10 +5,12 @@
 
 // Write a macro that passes the quiz! No hints this time, you can do it!
 
-#[macro_export]
-macro_rules! my_macro {
-    ($arg:expr) => {
-        format!("Hello {}", $arg);
+#[macro_use]
+mod macros {
+    macro_rules! my_macro {
+        ($x:expr) => {
+            format!("Hello {}", $x)
+        };
     }
 }
 

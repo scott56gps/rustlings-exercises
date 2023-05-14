@@ -33,15 +33,32 @@ impl Default for Person {
 // If while parsing the age, something goes wrong, then return the default of Person
 // Otherwise, then return an instantiated Person object with the results
 
-// I AM NOT DONE
+fn parse_name(string: Option<&str>) -> Option<String> {
+    string.and_then(|name| (!name.is_empty()).then_some(name.to_string()))
+}
+
+fn parse_age(string: Option<&str>) -> Option<usize> {
+    string.and_then(|age| age.parse::<usize>().ok())
+}
 
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
-        // if s.len() == 0 {
-        //     Person::default()
-        // }
+        if s.len() == 0 {
+            return Person::default();
+        }
 
-        Person::default()
+        // This iterator must be mutable because we are about to call next(),
+        //  thus modifying the iterator
+        let mut split_string = s.split(",");
+        let parsed_name = parse_name(split_string.next());
+        let parsed_age = parse_age(split_string.next());
+
+        let parsed_name_age = parsed_name.zip(parsed_age);
+
+        match parsed_name_age {
+            Some((name, age)) => Person { name, age },
+            None => Person::default()
+        }
     }
 }
 
